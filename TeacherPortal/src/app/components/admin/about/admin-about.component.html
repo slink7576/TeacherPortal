@@ -1,0 +1,48 @@
+<app-admin-component></app-admin-component>
+<form (ngSubmit)="SubmitForm()">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="text">Ім'я</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="name.value"
+             name="name"
+             id="name"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Телефон</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="phone.value"
+             name="phone"
+             id="phone"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="email">Пошта (<label class="text-info">Ця адреса буде використовуватися для зворотного зв'язку</label>)</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="email.value"
+             name="email"
+             id="email"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="school">Заклад</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="school.value"
+             name="school"
+             id="school"
+             required>
+    </div>
+    <div class="formphotogroup">
+      <label for="name">Фото</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="photo.value"
+             name="photo"
+             id="photo"
+             required>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+  </div>
+</form>

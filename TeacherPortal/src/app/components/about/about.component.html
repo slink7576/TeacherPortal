@@ -1,0 +1,40 @@
+<app-nav-component></app-nav-component>
+<div class="container">
+    <div class="row p-3 pt-1 mx-auto bg-white">
+        <div class="col-md-6 col-xs-12 text-center" *ngIf="photo.value.length != 0">
+            <img src="{{ photo.value }}"  class="img-thumbnail"/>
+        </div>
+        <div class="col-md-6 col-xs-12 text-left">
+            <div class="row" *ngIf="name.value.length != 0">
+                <div class="col-md-1 col-xs-1">
+                    <i class="fa fa-user text-lightbl"></i>
+                </div>
+                <div class="col-md-11 col-xs-11">
+                    {{ name.value }}
+                </div>
+            </div>
+            <div class="row" *ngIf="phone.value.length != 0">
+                <div class="col-md-1">
+                    <i class="fa fa-phone text-lightbl"></i>
+                </div>
+                <div class="col-md-11">
+                    {{ phone.value }}
+                </div>
+            </div>
+            <div class="row" *ngIf="email.value.length != 0">
+                <div class="col-md-1">
+                    <i class="fa fa-at text-lightbl"></i>
+                </div>
+                <div class="col-md-11">
+                    {{ email.value }}
+                </div>
+            </div>
+        </div>
+        <br />
+
+    </div>
+    <div class="text-center bg-white p-3" *ngIf="school.value.length != 0">
+        <hr />
+        {{ school.value }}
+    </div>
+</div>

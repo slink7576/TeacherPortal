@@ -1,0 +1,133 @@
+<app-admin-component></app-admin-component>
+<div class="container p-2">
+  <div class="form-inline article-item mx-auto">
+    <input type="text" [(ngModel)]="findName" placeholder="Назва" class="form-control mr-2 mt-1 mb-1" />
+    <select class="form-control mr-2"
+            [(ngModel)]="selectedMaterialTypeId"
+            name="type"
+            id="type"
+            required>
+      <option *ngFor="let type of materialTypes" [value]="type.id">{{ type.name }}</option>
+    </select>
+    <button type="submit" (click)="Search()" class="btn btn-primary mr-2 mt-1 mb-1"> <i class="fa fa-search"></i></button>
+    <button type="submit" (click)="Refresh()" class="btn btn-primary mt-1 mb-1"> <i class="fa fa-refresh"></i></button>
+  </div>
+</div>
+<hr />
+<div class="row p-1 pl-3 text-center">
+  <div class="col-md-2">
+    Назва
+  </div>
+  <div class="col-md-2">
+    Посилання
+  </div>
+  <div class="col-md-3">
+    Перегляди
+  </div>
+  <div class="col-md-3">
+    Тип матеріалу
+  </div>
+  <div class="col-md-2">
+    <button class="btn-blue-back" (click)="OpenForm()" data-toggle="modal" data-target="#materialModal">
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+  </div>
+</div>
+<hr />
+<div *ngFor="let material of materials">
+  <div class="row p-1 pl-3 text-center">
+    <div class="col-md-2 link-material">
+        <a (click)="OpenUrl(material.link)">{{ material.name }}</a>
+    </div>
+    <div class="col-md-2">
+      <div *ngIf="material.link.length > 45;else fulllink">
+        {{ material.link.slice(0,40) + "..." }}
+      </div>
+      <ng-template #fulllink>
+        {{ material.link }}
+      </ng-template>
+    </div>
+    <div class="col-md-3">
+      <i class="fa fa-eye"></i> {{ material.GetTotalViews() }}
+    </div>
+    <div class="col-md-3">
+      {{ material.type.name }}
+    </div>
+    <div class="col-md-2">
+      <button class="btn-blue-back" (click)="OpenStats(material.id)" data-toggle="modal" data-target="#statsModal"><i class="fa fa-bar-chart fa-lg"></i></button>
+      <button class="btn-blue-back" (click)="OpenForm(material.id)" data-toggle="modal" data-target="#materialModal"><i class="fa fa-pencil fa-lg"></i></button>
+      <button class="btn-blue-back" (click)="Delete(material.id)"><i class="fa fa-trash fa-lg"></i></button>
+    </div>
+  </div>
+  <hr />
+</div>
+<div *ngIf="empty" class="text-center mt-2">
+    Нічого не знайдено
+</div>
+<!-- StatsModal -->
+<div class="modal fade" id="statsModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleModalLabel">Статистика</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <canvas #statChart width="400" height="400">{{ chart }}</canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MaterialModal -->
+<div class="modal fade" id="materialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleModalLabel">Матеріал</h5>
+        <button type="button" #hideModal class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="SubmitForm()">
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="name">Назва</label>
+                  <input type="text" class="form-control"
+                         [(ngModel)]="editMaterial.name"
+                         name="name"
+                         id="name"
+                         required>
+              </div>
+              <div class="form-group">
+
+                  <label for="link">Посилання (Тег</label>
+                  <label class="text-info">"https://"</label>додається автоматично)
+                  <br />
+                  <input type="text" class="form-control"
+                         [(ngModel)]="editMaterial.link"
+                         name="link"
+                         id="link"
+                         required>
+              </div>
+              <div class="form-group">
+                  <label for="type">Тип матеріалу</label>
+                  <select class="form-control"
+                          [(ngModel)]="selectedMaterialTypeId"
+                          name="type"
+                          id="type"
+                          required>
+                      <option *ngFor="let type of materialTypes" [value]="type.id">{{ type.name }}</option>
+                  </select>
+              </div>
+              <label *ngIf="formError" class="text-danger">Заповніть усі поля!</label>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Відміна</button>
+          <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

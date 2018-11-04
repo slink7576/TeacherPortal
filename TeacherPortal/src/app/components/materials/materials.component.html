@@ -1,0 +1,27 @@
+<app-nav-component></app-nav-component>
+<div class="container p-2">
+  <div class="form-inline article-item mx-auto">
+    <input type="text" [(ngModel)]="findName" placeholder="Назва" class="form-control mr-2 mt-1 mb-1" />
+    <select class="form-control mr-2 mt-1 mb-1"
+            [(ngModel)]="selectedType"
+            name="type"
+            id="type"
+            required>
+      <option *ngFor="let type of materialTypes" [value]="type.id">{{ type.name }}</option>
+    </select>
+    <button type="submit" (click)="Search()" class="btn btn-primary mr-2 mt-1 mb-1"> <i class="fa fa-search"></i></button>
+    <button type="submit" (click)="Refresh()" class="btn btn-primary mt-1 mb-1"> <i class="fa fa-refresh"></i></button>
+  </div>
+</div>
+<hr />
+<div *ngIf="empty" class="text-center mt-2">
+    Нічого не знайдено
+</div>
+<div *ngFor="let material of materials">
+  <div data-id="{{ material.id }}" class="row p-1 pl-3">
+    <div class="col-md-4">{{ material.name }}</div>
+    <div class="col-md-4">{{ material.type.name }}</div>
+    <div class="col-md-4 link-material"><a (click)="OpenUrl(material.link, material.id)">Відкрити</a></div>
+  </div>
+  <hr />
+</div>

@@ -1,0 +1,30 @@
+<app-nav-component></app-nav-component>
+<div class="container p-5">
+  <div *ngIf="hasSend;else sendForm" class="text-center">
+    Дякуємо за ваше повідомлення!
+  </div>
+  <ng-template #sendForm>
+    <form (ngSubmit)="SubmitForm()">
+      <div class="form-group">
+        <label for="name">Ім'я:</label>
+        <input type="text" class="form-control"
+               [(ngModel)]="name"
+               name="name"
+               id="name"
+               required>
+      </div>
+      <div class="form-group">
+        <label for="body">Повідомлення:</label>
+        <textarea type="text" class="form-control" style="min-height:20em"
+                  [(ngModel)]="body"
+                  name="body"
+                  id="body"
+                  required></textarea>
+      </div>
+      <label *ngIf="formError" class="text-danger">Заповніть усі поля!</label>
+      <div class="text-right">
+        <button type="submit" class="btn btn-primary">Надіслати</button>
+      </div>
+    </form>
+  </ng-template>
+</div>

@@ -1,0 +1,135 @@
+<app-admin-component></app-admin-component>
+<hr />
+<div class="row p-1 pl-3 text-center">
+  <div class="col-md-5">
+    Заголовок
+  </div>
+  <div class="col-md-1">
+    Перегляди
+  </div>
+  <div class="col-md-2">
+    Дата створення
+  </div>
+  <div class="col-md-2">
+    <button class="btn-blue-back" (click)="OpenForm()" data-toggle="modal" data-target="#articleModal">
+      <i class="fa fa-plus fa-lg"></i>
+    </button>
+  </div>
+</div>
+<hr />
+<div *ngFor="let article of articles">
+  <div class="row p-1 pl-3 text-center">
+    <div class="col-md-5">
+      <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+    </div>
+    <div class="col-md-1">
+      <i class="fa fa-eye"></i> {{ article.GetTotalViews() }}
+    </div>
+    <div class="col-md-2">
+      {{ article.date }}
+    </div>
+    <div class="col-md-2">
+      <button class="btn-blue-back" (click)="OpenStats(article.id)" data-toggle="modal" data-target="#statsModal"><i class="fa fa-bar-chart fa-lg"></i></button>
+      <button class="btn-blue-back" (click)="OpenForm(article.id)" data-toggle="modal" data-target="#articleModal"><i class="fa fa-pencil fa-lg"></i></button>
+      <button class="btn-blue-back" (click)="OpenAddMaterial(article.id)" data-toggle="modal" data-target="#materialModal"><i class="fa fa-file-text fa-lg"></i></button>
+      <button class="btn-blue-back" (click)="Delete(article.id)"><i class="fa fa-trash fa-lg"></i></button>
+    </div>
+  </div>
+  <hr />
+</div>
+
+<!-- AddMaterialModal -->
+<div class="modal fade" id="materialModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleModalLabel">Додати матеріал</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-inline">
+          <input type="text" [(ngModel)]="findName" placeholder="Назва" class="form-control mr-2 mt-1 mb-1" />
+          <select class="form-control mr-2"
+                  [(ngModel)]="selectedMaterial"
+                  name="type"
+                  id="type"
+                  required>
+            <option *ngFor="let type of materialTypes" [value]="type.id">{{ type.name }}</option>
+          </select>
+          <button type="submit" (click)="Search()" class="btn btn-primary mr-2 mt-1 mb-1"> <i class="fa fa-search"></i></button>
+        </div>
+          <div>
+            <div *ngFor="let material of materials">
+              <div class="row p-1 pl-3 text-center">
+                <div class="col-md-8">
+                  {{ material.name }}
+                </div>
+
+                <div class="col-md-4">
+                  <button class="btn-blue-back mt-1 mb-1" (click)="AddMaterial(material.id)" data-toggle="modal" data-target="#materialModal"><i class="fa fa-plus fa-lg"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<!-- StatsModal -->
+<div class="modal fade" id="statsModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleModalLabel">Статистика</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <canvas #statChart width="400" height="400">{{ chart }}</canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ArticleModal -->
+<div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="articleModalLabel">Новина</h5>
+        <button type="button" #hideModal class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="SubmitForm()">
+          <div class="modal-body">
+              <div class="form-group">
+                      <label for="title">Заголовок</label>
+                  <input type="text" class="form-control"
+                         [(ngModel)]="editArticle.title"
+                         name="title"
+                         id="title"
+                         required>
+              </div>
+              <div class="form-group">
+                      <label for="body">Тіло</label>
+                  <textarea style="min-height:10em" class="form-control"
+                            [(ngModel)]="editArticle.body"
+                            name="body"
+                            id="body"
+                            required>
+            </textarea>
+              </div>
+              <label *ngIf="formError" class="text-danger">Заповніть усі поля!</label>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Відміна</button>
+              <button type="submit" class="btn btn-primary">Зберегти</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

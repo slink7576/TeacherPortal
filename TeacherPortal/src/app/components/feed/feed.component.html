@@ -1,0 +1,37 @@
+<app-nav-component></app-nav-component>
+<div class="container">
+  <div *ngFor="let article of articles" data-id="{{ article.id }}" class="mt-4 mb-2 article-item mx-auto bg-white">
+    <div class="p-2 bg-dark text-white">
+      <div class="row">
+        <div class="col-md-8">
+          <a class="a-title" [routerLink]="['/article', article.id]">{{ article.title }}</a>
+        </div>
+        <div class="col-md-4 text-right">
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <div *ngIf="article.body.length > 300;else fulltext">
+        {{ article.body.slice(0,300) + "..." }}
+        <br />
+        <a [routerLink]="['/article', article.id]">Завантажити більше</a>
+      </div>
+      <ng-template #fulltext>
+        {{ article.body }}
+      </ng-template>
+    </div>
+    <hr class="m-0" />
+    <div class="row p-2">
+      <div class="col-md-8 col-8">
+        <i class="fa fa-eye"></i> {{ article.GetTotalViews()}}
+      </div>
+      <div class="col-md-4 col-4 text-right">
+        {{ article.date }}
+      </div>
+    </div>
+  </div>
+  <div class="article-item mx-auto m-3">
+    <button (click)="Previous()" class="btn-blue-back"><i class="fa fa-arrow-left fa-lg"></i></button>
+    <button (click)="Next()" class="btn-blue-back"><i class="fa fa-arrow-right fa-lg"></i></button>
+  </div>
+</div>

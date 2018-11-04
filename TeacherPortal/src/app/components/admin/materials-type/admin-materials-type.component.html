@@ -1,0 +1,60 @@
+<app-admin-component></app-admin-component>
+<hr />
+<div class="row p-1 pl-3 text-center">
+    <div class="col-md-6">
+        Назва
+    </div>
+    <div class="col-md-6">
+        <button class="btn-blue-back" (click)="OpenForm()" data-toggle="modal" data-target="#materialTypeModal">
+            <i class="fa fa-plus fa-lg"></i>
+        </button>
+    </div>
+</div>
+<hr />
+<div *ngFor="let materialType of materialTypes">
+    <div class="row p-1 pl-3 text-center">
+        <div class="col-md-6" *ngIf="materialType.name != 'Фото';else systemtype">
+            {{ materialType.name }}
+        </div>
+        <ng-template #systemtype>
+            <div class="col-md-6 text-warning">
+                {{ materialType.name }}
+            </div>
+        </ng-template>
+        <div class="col-md-6" *ngIf="materialType.name != 'Фото'">
+            <button class="btn-blue-back" (click)="OpenForm(materialType.id)" data-toggle="modal" data-target="#materialTypeModal"><i class="fa fa-pencil fa-lg"></i></button>
+            <button class="btn-blue-back" (click)="Delete(materialType.id)"><i class="fa fa-trash fa-lg"></i></button>
+        </div>
+    </div>
+    <hr />
+</div>
+<!-- Modal -->
+<div class="modal fade" id="materialTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="materialTypeModalLabel">Тип матеріалу</h5>
+                <button type="button"  #hideModal class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form (ngSubmit)="SubmitForm()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Назва</label>
+                        <input type="text" class="form-control"
+                               [(ngModel)]="editMaterialType.name"
+                               name="name"
+                               id="name"
+                               required>
+                    </div>
+                    <label *ngIf="formError" class="text-danger">Заповніть усі поля!</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Відміна</button>
+                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

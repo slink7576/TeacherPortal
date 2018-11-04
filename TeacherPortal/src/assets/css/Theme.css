@@ -1,0 +1,108 @@
+.bg-dark {
+  background-color: #3a4e7a !important;
+  color: white
+}
+
+.top-bar {
+  min-height: 10em;
+}
+
+hr {
+  margin: 0px;
+}
+
+.nav-item :hover {
+  background-color: #5e83ba;
+  color: white !important;
+}
+
+.article-item {
+  max-width: 40em;
+}
+
+.materials-item {
+  min-height: 10em;
+}
+
+.bg-gray {
+  background-color: #f7f7f7;
+}
+
+.bottom-credits {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.flex {
+  height: 100%;
+  margin: 0;
+}
+
+.link-material {
+  text-decoration: underline;
+  color: cornflowerblue;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #3a4e7a;
+  border-color: #3a4e7a;
+}
+
+  .btn-primary:hover {
+    background-color: #5e83ba;
+    border-color: #5e83ba;
+  }
+
+.btn-secondary {
+  color:black;
+  background-color: #f1f1f0;
+  border-color: #c2d2e9;
+}
+
+  .btn-secondary:hover {
+    color: black;
+    background-color: #c2d2e9;
+    border-color: #5e83ba;
+  }
+
+.a-title {
+  color: white;
+}
+
+  .a-title:hover {
+    color: #5e83ba;
+  }
+
+.text-lightbl {
+  color: #5e83ba;
+}
+
+.btn-blue {
+  background: none;
+  border: none;
+  color: white;
+}
+
+  .btn-blue:hover {
+    background: none;
+    border: none;
+    color: #5e83ba;
+    cursor: pointer;
+  }
+
+.btn-blue-back {
+  background: none;
+  border: none;
+  color: #3a4e7a;
+}
+
+  .btn-blue-back :hover {
+    background: none;
+    border: none;
+    color: #5e83ba;
+    cursor: pointer;
+  }
+

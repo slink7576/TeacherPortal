@@ -1,0 +1,7 @@
+<app-nav-component></app-nav-component>
+<div *ngFor="let photo of photos" class="text-center m-0 mt-2">
+    <div class="col-12 col-md-12 p-0 m-0">
+        <img src="{{ photo.link }}" alt="{{ photo.name }}" style="width:50%;height:50%" class="img-thumbnail"/>
+        <h5>{{ photo.name }}</h5>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="login pt-5">
+  <div class="container pt-5 mt-5">
+    <div style="max-height:20em;max-width:20em;" class="article-item mx-auto">
+      <div class="form-group mx-sm-3 mb-2">
+        <label *ngIf="errorPass" class="text-danger">Неправильний пароль!</label>
+          <br />
+        <label for="inputPassword">Увійти</label>
+        <input type="password" class="form-control mb-2" id="inputPassword" placeholder="Пароль" [(ngModel)]="password">
+        <button (click)="Login()" class="btn btn-primary">Увійти</button>
+      </div>
+    </div>
+  </div>
+</div>
